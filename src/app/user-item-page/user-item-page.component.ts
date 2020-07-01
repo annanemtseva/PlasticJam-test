@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'chart.js';
+import { HttpService, User } from '../http.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-user-item-page',
@@ -7,22 +9,60 @@ import { Chart } from 'chart.js';
   styleUrls: ['./user-item-page.component.scss']
 })
 export class UserItemPageComponent implements OnInit {
-  Linechart = [];
-  // data = [
-  //   1, 4, 8, 3, 0, 8, 7, 5, 111, 45
-  // ]
 
-  constructor() { }
+  response: User;
+  userId: number;
+  params: Params;
+  ClickLineChart = Chart;
+  ViewsLineChart = Chart;
+  days = [];
+  clicks = [];
+  views = [];
+
+
+  constructor(
+    private http: HttpService,
+    private route: ActivatedRoute
+  ) { }
 
   ngOnInit() {
 
-    this.Linechart = new Chart('canvas', {
+    this.route.params.subscribe((params: Params) => {
+      this.params = params;
+      this.userId = +(params.id);
+      // console.log(this.userIdToString);
+      // console.log('params userId', typeof this.userId);
+
+    });
+
+
+    this.http.getUser(this.userId).subscribe(response => {
+      this.clicks = response.map(user => user.clicks);
+      this.views = response.map(user => user.page_views);
+      this.days = response.map(user => user.date);
+
+
+      this.ClickLineChart.data.labels = this.days;
+      this.ClickLineChart.data.datasets.forEach((dataset) => {
+        dataset.data = this.clicks;
+        dataset.label = 'clicks';
+      });
+      this.ClickLineChart.update();
+
+      this.ViewsLineChart.data.labels = this.days;
+      this.ViewsLineChart.data.datasets.forEach((dataset) => {
+        dataset.data = this.views;
+        dataset.label = 'views';
+      });
+      this.ViewsLineChart.update();
+    });
+
+
+    let configChart = {
       type: 'line',
       data: {
-        labels: ['Now', 'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', ],
         datasets: [{
-          label: 'clicks',
-          data: [120, 190, 300, 500, 200, 0, 0, 300],
+          // label: 'clicks',
           backgroundColor: [
             'transparent',
           ],
@@ -51,9 +91,12 @@ export class UserItemPageComponent implements OnInit {
           }],
         }
       }
-    });
+    }
+
+    this.ClickLineChart = new Chart('clickCanvas', configChart);
+
+    this.ViewsLineChart = new Chart('viewsCanvas', configChart);
+
   }
-
-
-
 }
+
