@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { Chart } from 'chart.js';
-import { HttpService, User } from '../http.service';
+import {HttpService, User} from '../http.service';
 import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
@@ -9,8 +9,6 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./user-item-page.component.scss']
 })
 export class UserItemPageComponent implements OnInit {
-
-  response: User;
   userId: number;
   params: Params;
   ClickLineChart = Chart;
@@ -18,7 +16,7 @@ export class UserItemPageComponent implements OnInit {
   days = [];
   clicks = [];
   views = [];
-
+  userFirstName: string;
 
   constructor(
     private http: HttpService,
@@ -30,17 +28,13 @@ export class UserItemPageComponent implements OnInit {
     this.route.params.subscribe((params: Params) => {
       this.params = params;
       this.userId = +(params.id);
-      // console.log(this.userIdToString);
-      // console.log('params userId', typeof this.userId);
-
+      this.userFirstName = params.userFirstName;
     });
-
 
     this.http.getUser(this.userId).subscribe(response => {
       this.clicks = response.map(user => user.clicks);
       this.views = response.map(user => user.page_views);
       this.days = response.map(user => user.date);
-
 
       this.ClickLineChart.data.labels = this.days;
       this.ClickLineChart.data.datasets.forEach((dataset) => {
@@ -57,8 +51,7 @@ export class UserItemPageComponent implements OnInit {
       this.ViewsLineChart.update();
     });
 
-
-    let configChart = {
+    const configChart = {
       type: 'line',
       data: {
         datasets: [{
@@ -69,7 +62,7 @@ export class UserItemPageComponent implements OnInit {
           borderColor: [
             'rgba(58,128,186,1)',
           ],
-          borderWidth: 4
+          borderWidth: 3
         }]
       },
       options: {
@@ -94,9 +87,7 @@ export class UserItemPageComponent implements OnInit {
     }
 
     this.ClickLineChart = new Chart('clickCanvas', configChart);
-
     this.ViewsLineChart = new Chart('viewsCanvas', configChart);
-
   }
 }
 

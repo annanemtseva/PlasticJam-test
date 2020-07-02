@@ -30,18 +30,8 @@ a{
   display: inline-block;
 }
 
-//.logo{
-//  padding: 25px 0;
-//  p{
-//    @extend .font_montserrat_normal;
-//    font-size: 40px;
-//    line-height: 49px;
-//  }
-//}
-
-
 @media (max-width: 1200px) {
-  .container{
+  .my_container{
     width: 972px;
     margin: 0 auto;
   }
@@ -49,21 +39,21 @@ a{
 
 
 @media (max-width: 993px) {
-  .container{
+  .my_container{
     width: 748px;
     margin: 0 auto;
   }
 }
 
 @media (max-width: 769px) {
-  .container{
+  .my_container{
     width: 546px;
     margin: 0 auto;
   }
 }
 
 @media (max-width: 577px) {
-  .container{
+  .my_container{
     width: 80%;
     margin: 0 auto;
   }

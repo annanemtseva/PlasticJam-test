@@ -14,19 +14,18 @@
       <a routerLink="/users">User satistics</a>
       <div class="arrow">
       </div>
-      <div class="active">Name</div>
+      <div #name class="active">{{userFirstName}}</div>
     </div>
     <div class="my_container">
-      <h2>Name</h2>
+      <h2>{{userFirstName}}</h2>
       <h3>Clicks</h3>
-
-      <div class="chart-container">
-        <canvas id="clickCanvas"></canvas>
+      <div class="chart-container-clicks">
+        <canvas id="clickCanvas" width="4" height="1"></canvas>
       </div>
 
       <h3>Vievs</h3>
-      <div class="chart-container" style="position: relative; height:40vh; width:70vw">
-        <canvas id="viewsCanvas"></canvas>
+      <div class="chart-container-views" >
+        <canvas id="viewsCanvas" width="4" height="1"></canvas>
       </div>
     </div>
   </div>

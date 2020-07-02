@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: '', component: MainPageComponent},
   {path: 'users', component: UsersListPageComponent},
-  {path: 'user/:id', component: UserItemPageComponent},
+  {path: 'user/:userFirstName/:id', component: UserItemPageComponent},
   // {path: 'error', component: ErrorPageComponent},
   // {path: '**', redirectTo: '/error'}
 ];
