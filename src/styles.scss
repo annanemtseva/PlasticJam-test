@@ -1,1 +1,66 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+
+.font_montserrat_normal {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: normal;
+  color: #FFFFFF;
+}
+
+.font_montserrat_bold {
+  font-family: Montserrat;
+  font-style: normal;
+  font-weight: bold;
+  color: #FFFFFF;
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+.my_container{
+  width: 1180px;
+  margin: 0 auto;
+}
+
+a{
+  list-style: none;
+  text-decoration: none;
+  display: inline-block;
+}
+
+@media (max-width: 1200px) {
+  .my_container{
+    width: 972px;
+    margin: 0 auto;
+  }
+}
+
+
+@media (max-width: 993px) {
+  .my_container{
+    width: 748px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 769px) {
+  .my_container{
+    width: 546px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 577px) {
+  .my_container{
+    width: 80%;
+    margin: 0 auto;
+  }
+}
+
+
+
+
+
+
