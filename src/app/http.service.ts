@@ -21,7 +21,7 @@ export interface User {
 }
 
 
-export interface Responce {
+export interface Response {
   'content': Stats[];
   'totalPages': number;
   'totalElements': number;
@@ -38,7 +38,7 @@ export class HttpService {
   ) { }
 
   getUsers(page: number, pageSize: number) {
-    return this.http.get<Responce>(`http://localhost:3000/task/api/v1/users?page=${page}&range=${pageSize}`);
+    return this.http.get<Response>(`http://localhost:3000/task/api/v1/users?page=${page}&range=${pageSize}`);
 
   }
 
