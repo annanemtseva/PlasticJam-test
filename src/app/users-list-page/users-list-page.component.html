@@ -48,7 +48,7 @@
     </div>
 
     <div class="card">
-        <jw-pagination #mydiv [items]="users" [maxPages]="totalPages"
+        <jw-pagination #mydiv [items]="users" [maxPages]="totalPages" [pageSize]="pageSize"
                        (changePage)="onChangePage($event)"></jw-pagination>
 
     </div>

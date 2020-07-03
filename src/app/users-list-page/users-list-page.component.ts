@@ -1,5 +1,5 @@
 // @ts-ignore
-import {AfterViewInit, Component, ElementRef, OnInit, Output, ViewChild, ViewChildren} from '@angular/core';
+import {Component, ElementRef, OnInit, Output, ViewChild} from '@angular/core';
 import {HttpService, Stats, User} from '../http.service';
 import {Router} from '@angular/router';
 
@@ -14,34 +14,37 @@ export class UsersListPageComponent implements OnInit {
   pageOfItems: Stats[];
 
   pageSize = 16;
-  totalPages = 100;
+  totalPages: number;
 
   @Output() user: User;
 
-  @ViewChild('mydiv', { static: false }) public mydiv: ElementRef<any>;
-  // @ViewChildren('userFirstName') public userFirstName: ElementRef<any>;
+  @ViewChild('mydiv', {static: false}) public mydiv: ElementRef<any>;
+
 
   constructor(
-    private http: HttpService,
-    private route: Router
-  ) { }
+    private http: HttpService
+  ) {
+  }
 
   ngOnInit() {
     this.http.getUsers(0, this.pageSize).subscribe(response => {
       this.totalPages = response.totalPages;
-      this.users = response.content.concat(Array((this.totalPages - 1) * this.pageSize ));
-      console.log('pageSize ~> ', this.pageSize );
+      this.users = response.content.concat(Array((this.totalPages - 1) * this.pageSize) );
+      console.log('pageSize ~> ', this.pageSize);
     });
   }
 
 
   onChangePage(pageOfItems: Array<any>) {
     // @ts-ignore
-    this.http.getUsers(this.mydiv.pager.currentPage - 1, this.pageSize).subscribe(response => {
-      this.pageOfItems = response.content;
-    });
-    this.pageOfItems = pageOfItems;
-    console.log(this.mydiv);
+    const currentPage = this.mydiv.pager.currentPage - 1;
+    console.log(' ~> currentPage ', currentPage);
+    if(currentPage >= 0 ) {
+      this.http.getUsers(currentPage, this.pageSize).subscribe(response => {
+        this.pageOfItems = response.content;
+      });
+      this.pageOfItems = pageOfItems;
+    }
 
   }
 
