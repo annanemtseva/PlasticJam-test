@@ -1,7 +1,7 @@
 // @ts-ignore
-import {Component, ElementRef, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {HttpService, Stats, User} from '../http.service';
-import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-users-list-page',
@@ -16,8 +16,6 @@ export class UsersListPageComponent implements OnInit {
   pageSize = 16;
   totalPages: number;
 
-  @Output() user: User;
-
   @ViewChild('mydiv', {static: false}) public mydiv: ElementRef<any>;
 
 
@@ -30,7 +28,7 @@ export class UsersListPageComponent implements OnInit {
     this.http.getUsers(0, this.pageSize).subscribe(response => {
       this.totalPages = response.totalPages;
       this.users = response.content.concat(Array((this.totalPages - 1) * this.pageSize) );
-      console.log('pageSize ~> ', this.pageSize);
+
     });
   }
 
@@ -38,8 +36,7 @@ export class UsersListPageComponent implements OnInit {
   onChangePage(pageOfItems: Array<any>) {
     // @ts-ignore
     const currentPage = this.mydiv.pager.currentPage - 1;
-    console.log(' ~> currentPage ', currentPage);
-    if(currentPage >= 0 ) {
+    if (currentPage >= 0 ) {
       this.http.getUsers(currentPage, this.pageSize).subscribe(response => {
         this.pageOfItems = response.content;
       });
