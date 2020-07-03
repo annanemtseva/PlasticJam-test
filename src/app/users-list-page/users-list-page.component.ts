@@ -1,3 +1,4 @@
+// @ts-ignore
 import {AfterViewInit, Component, ElementRef, OnInit, Output, ViewChild, ViewChildren} from '@angular/core';
 import {HttpService, Stats, User} from '../http.service';
 import {Router} from '@angular/router';
@@ -7,7 +8,7 @@ import {Router} from '@angular/router';
   templateUrl: './users-list-page.component.html',
   styleUrls: ['./users-list-page.component.scss']
 })
-export class UsersListPageComponent implements OnInit, AfterViewInit {
+export class UsersListPageComponent implements OnInit {
   users: Stats[] = [];
 
   pageOfItems: Stats[];
@@ -18,7 +19,7 @@ export class UsersListPageComponent implements OnInit, AfterViewInit {
   @Output() user: User;
 
   @ViewChild('mydiv', { static: false }) public mydiv: ElementRef<any>;
-  @ViewChildren('userFirstName') public userFirstName: ElementRef<any>;
+  // @ViewChildren('userFirstName') public userFirstName: ElementRef<any>;
 
   constructor(
     private http: HttpService,
@@ -35,15 +36,15 @@ export class UsersListPageComponent implements OnInit, AfterViewInit {
 
 
   onChangePage(pageOfItems: Array<any>) {
+    // @ts-ignore
     this.http.getUsers(this.mydiv.pager.currentPage - 1, this.pageSize).subscribe(response => {
       this.pageOfItems = response.content;
     });
     this.pageOfItems = pageOfItems;
+    console.log(this.mydiv);
 
   }
-  ngAfterViewInit() {
-    console.log('userName -> from users', this.userFirstName);
-  }
+
 
 }
 
