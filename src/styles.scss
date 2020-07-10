@@ -14,6 +14,20 @@
   color: #FFFFFF;
 }
 
+.wrap {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+ main {
+  flex: 1 0 auto;
+}
+
+header, footer {
+  flex: 0 0 auto;
+}
+
 *{
   margin: 0;
   padding: 0;

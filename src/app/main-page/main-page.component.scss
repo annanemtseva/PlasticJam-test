@@ -12,10 +12,13 @@
   color: #FFFFFF;
 }
 
-.wrap {
+
+
+header {
   background-image: url('../../assets/Rectangle.png');
   background-repeat: no-repeat;
   background-position: 50% 0;
+  
 }
 
 .logo {
@@ -85,6 +88,7 @@ h1 {
 }
 
 main {
+  
   h2 {
     @extend .font_montserrat_normal;
     font-size: 32px;
@@ -164,7 +168,7 @@ main {
   }
 }
 
-footer {
+footer { 
   background-image: url("../../assets/Rectangle_footer.png");
   background-repeat: no-repeat;
   background-size: 110%;
