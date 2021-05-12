@@ -20,7 +20,7 @@
     "@angular/platform-browser-dynamic": "~8.2.14",
     "@angular/router": "~8.2.14",
     "angularfire2": "^5.4.2",
-    "chart.js": "^2.9.3",
+    "chart.js": "^2.9.4",
     "firebase": "^7.15.5",
     "jw-angular-pagination": "1.1.0",
     "rxjs": "~6.4.0",
